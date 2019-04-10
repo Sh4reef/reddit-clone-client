@@ -15,6 +15,19 @@ const TOPICS_QUERY = gql`
   }
 `
 
+const Topic = ({topic}) => (
+  <div className="topic" key={topic.key}>
+    <div className="votes">
+      <span className="upvote">▲</span>
+      <span className="number">{topic.votes}</span>
+      <span className="downvote">▼</span>
+    </div>
+    <p>
+      {topic.content}
+    </p>
+  </div>
+)
+
 class App extends Component {
   render() {
     return (
@@ -24,16 +37,7 @@ class App extends Component {
             if (loading) return <div>Loading...</div>
             if (error) return <div>Error!</div>
             return data.topics.map((topic) => (
-              <div className="topic" key={topic.key}>
-                <div className="votes">
-                  <span className="upvote">▲</span>
-                  <span className="number">{topic.votes}</span>
-                  <span className="downvote">▼</span>
-                </div>
-                <p>
-                  {topic.content}
-                </p>
-              </div>
+              <Topic key={topic.id} topic={topic} />
             ))
           }}
         </Query>
