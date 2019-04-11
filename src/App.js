@@ -79,7 +79,7 @@ const Topic = withApollo(({ client, topic }) => {
           }).then(() => setLoading(false))
         }} className="downvote">▼</span>
       </div>
-      <p>
+      <p className="content">
         {topic.content}
       </p>
     </div>
