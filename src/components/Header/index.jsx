@@ -1,25 +1,7 @@
 import React, { useState } from 'react';
 // apollo
-import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
-
-const TOPICS_QUERY = gql`
-  query getTopics {
-    topics(orderBy: votes_DESC) {
-      id
-      content
-      votes
-    }
-  }
-`
-
-const NEWTOPIC_MUTATION = gql`
-  mutation NewTopic($content: String!) {
-    newTopic(content: $content) {
-      id content votes
-    }
-  }
-`
+import { TOPICS_QUERY, NEWTOPIC_MUTATION } from '../../graphql_tags';
 
 export default (props) => {
   const [show, setShow] = useState(false)

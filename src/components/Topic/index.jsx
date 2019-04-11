@@ -1,33 +1,7 @@
 import React, { useState } from 'react';
 // apollo
-import gql from 'graphql-tag';
 import { withApollo } from 'react-apollo';
-
-const TOPICS_QUERY = gql`
-  query getTopics {
-    topics(orderBy: votes_DESC) {
-      id
-      content
-      votes
-    }
-  }
-`
-
-const UPVOTE_MUTATION = gql`
-  mutation UpVote($id: ID!) {
-    upVote(id: $id) {
-      id content votes
-    }
-  }
-`
-
-const DOWNVOTE_MUTATION = gql`
-  mutation DownVote($id: ID!) {
-    downVote(id: $id) {
-      id content votes
-    }
-  }
-`
+import { TOPICS_QUERY, UPVOTE_MUTATION, DOWNVOTE_MUTATION } from '../../graphql_tags';
 
 export default withApollo(({ client, topic }) => {
   const [loading, setLoading] = useState(false)

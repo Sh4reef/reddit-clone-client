@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 // apollo
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import { TOPICS_QUERY } from './graphql_tags';
 // components
 import Header from './components/Header';
 import Topic from './components/Topic';
-
-const TOPICS_QUERY = gql`
-  query getTopics {
-    topics(orderBy: votes_DESC) {
-      id
-      content
-      votes
-    }
-  }
-`
 
 class App extends Component {
   render() {
