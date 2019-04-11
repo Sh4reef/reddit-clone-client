@@ -85,11 +85,16 @@
   height: 100px;
 }
 
-.create-btn {
-  background-color: #4fc0e8;
+.create-btn,
+.cancel-btn {  
   padding: 10px 20px;
   margin-top: 10px;
   float: right;
+}
+
+.create-btn {
+  background-color: #4fc0e8;
+  margin-left: 10px;
 }
 
 .votes {

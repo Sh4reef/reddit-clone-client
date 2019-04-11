@@ -102,6 +102,10 @@ const Header = (props) => {
           </div>
           <textarea placeholder="Content..." />
           <button type="submit" className="create-btn">Create</button>
+          <button onClick={(e) => {
+            e.preventDefault()
+            setShow(!show)
+          }} className="cancel-btn">Cancel</button>
         </form>
       </div>
     </header>
