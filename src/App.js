@@ -14,8 +14,8 @@ class App extends Component {
         <Header />
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Loading...</div>
-            if (error) return <div>Error!</div>
+            if (loading) return <div className="loading">Loading...</div>
+            if (error) return <div className="error">Error!</div>
             return data.topics.map((topic) => (
               <Topic key={topic.id} topic={topic} />
             ))

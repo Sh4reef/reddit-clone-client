@@ -5,6 +5,11 @@
   position: relative;
 }
 
+.loading, .error {
+  text-align: center;
+  padding: 2em 0;
+}
+
 .header {
   background-color: #4fc0e8;
   padding: 0.5em 1em;
