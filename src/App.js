@@ -93,6 +93,15 @@ class App extends Component {
           <div className="create">
             Create new topic
           </div>
+          <div className="modal">
+            <form>
+              <div className="label">
+                <label>create new topic</label>
+              </div>
+              <textarea placeholder="Content..."/>
+              <button type="submit" className="create-btn">Create</button>
+            </form>
+          </div>
         </header>
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {

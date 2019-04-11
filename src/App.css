@@ -2,12 +2,40 @@
   background-color: #f6f6ef;
   width: 85%;
   margin: 1em auto;
+  position: relative;
 }
 
 .header {
   background-color: #4fc0e8;
   padding: 0.5em;
   overflow: auto;
+}
+
+.modal {
+  -webkit-box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
+  padding: 3em;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.label {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+
+.modal textarea {
+  resize: none;
+  height: 200px;
+  width: 500px;
+  padding: 1em 2em;
 }
 
 .create {
@@ -27,6 +55,13 @@
   padding: 1em;
   width: 100%;
   height: 100px;
+}
+
+.create-btn {
+  background-color: #4fc0e8;
+  padding: 10px 20px;
+  margin-top: 10px;
+  float: right;
 }
 
 .votes {
