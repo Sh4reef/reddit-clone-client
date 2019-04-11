@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 // apollo
 import gql from 'graphql-tag';
