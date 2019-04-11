@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { withApollo } from 'react-apollo';
 import { TOPICS_QUERY, UPVOTE_MUTATION, DOWNVOTE_MUTATION } from '../../graphql_tags';
 
+// 
 export default withApollo(({ client, topic }) => {
   // useState hook is being used to manage loading state
   const [loading, setLoading] = useState(false)
@@ -27,6 +28,9 @@ export default withApollo(({ client, topic }) => {
     content: topic.content,
     votes: voteType === "upVote" ? ++topic.votes : --topic.votes
   })
+
+  // client.mutate resolves a single mutation and returns a Promise which is either
+  // resolved with the resulting data or rejected with an error.
 
   // Render Upvote
   const upVote = (

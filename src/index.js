@@ -9,10 +9,13 @@ import { ApolloProvider } from 'react-apollo';
 
 // This is the apollo client instance and it's being passed to
 // the ApolloProvider to share it with whole app
+// Get started - https://www.apollographql.com/docs/react/essentials/get-started
 const client = new ApolloClient({
   uri: "http://localhost:4000/"
 })
 
+// React-Apollo includes a component for providing a client instance to a React component tree,
+// and a higher-order component for retrieving that client instance.
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />

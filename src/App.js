@@ -16,6 +16,7 @@ class App extends Component {
           Query component is being used to fetch list of topics
           using TOPICS_QUERY from the server and the result will
           be an array of topics objects 
+          Queries - https://www.apollographql.com/docs/react/essentials/queries
         */}
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {

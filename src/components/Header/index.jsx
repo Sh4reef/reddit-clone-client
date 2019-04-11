@@ -5,7 +5,6 @@ import { TOPICS_QUERY, NEWTOPIC_MUTATION } from '../../graphql_tags';
 
 export default (props) => {
   const [show, setShow] = useState(false)
-  // const [loading, setLoading] = useState(false)
   const [content, setContent] = useState("")
   const exceeded = content.length > 255
   const invalid = content.length === 0 || exceeded
