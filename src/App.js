@@ -131,6 +131,7 @@ const Header = (props) => {
               })
               setLoading(!loading)
               setShow(!show)
+              window.scroll({ top: document.querySelector('body').getBoundingClientRect().bottom, behavior: "smooth" })
             }}>
               <div className="label">
                 <label>create new topic</label>
