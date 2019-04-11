@@ -32,11 +32,13 @@ const DOWNVOTE_MUTATION = gql`
 `
 
 const Topic = withApollo(({ client, topic }) => {
+  const [loading, setLoading] = useState(false)
   return (
     <div className="topic" key={topic.key}>
       <div className="votes">
         <span onClick={(e) => {
-          client.mutate({
+          setLoading(true)
+          !loading && client.mutate({
             mutation: UPVOTE_MUTATION,
             variables: { id: topic.id },
             optimisticResponse: {
@@ -46,13 +48,19 @@ const Topic = withApollo(({ client, topic }) => {
                 content: topic.content,
                 votes: ++topic.votes
               }
+            },
+            update: (proxy, { data }) => {
+              const { topics } = proxy.readQuery({ query: TOPICS_QUERY })
+              const sortedTopics = topics.sort((a, b) => b.votes - a.votes)
+              proxy.writeQuery({ query: TOPICS_QUERY, data: { topics: sortedTopics } })
             }
-          })
+          }).then(() => setLoading(false))
         }}
           className="upvote">▲</span>
         <span className="number">{topic.votes}</span>
         <span onClick={(e) => {
-          client.mutate({
+          setLoading(true)
+          !loading && client.mutate({
             mutation: DOWNVOTE_MUTATION,
             variables: { id: topic.id },
             optimisticResponse: {
@@ -62,8 +70,13 @@ const Topic = withApollo(({ client, topic }) => {
                 content: topic.content,
                 votes: --topic.votes
               }
+            },
+            update: (proxy, { data }) => {
+              const { topics } = proxy.readQuery({ query: TOPICS_QUERY })
+              const sortedTopics = topics.sort((a, b) => b.votes - a.votes)
+              proxy.writeQuery({ query: TOPICS_QUERY, data: { topics: sortedTopics } })
             }
-          })
+          }).then(() => setLoading(false))
         }} className="downvote">▼</span>
       </div>
       <p>
