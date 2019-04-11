@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 // apollo
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { Query, withApollo } from 'react-apollo';
 
 const TOPICS_QUERY = gql`
   query getTopics {
@@ -15,7 +15,23 @@ const TOPICS_QUERY = gql`
   }
 `
 
-const Topic = ({topic}) => (
+const UPVOTE_MUTATION = gql`
+  mutation UpVote($id: ID!) {
+    upVote(id: $id) {
+      id content votes
+    }
+  }
+`
+
+const DOWNVOTE_MUTATION = gql`
+  mutation DownVote($id: ID!) {
+    downVote(id: $id) {
+      id content votes
+    }
+  }
+`
+
+const Topic = withApollo(({topic}) => (
   <div className="topic" key={topic.key}>
     <div className="votes">
       <span className="upvote">▲</span>
@@ -26,7 +42,7 @@ const Topic = ({topic}) => (
       {topic.content}
     </p>
   </div>
-)
+))
 
 class App extends Component {
   render() {
