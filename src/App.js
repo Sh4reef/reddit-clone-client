@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 // apollo
@@ -31,18 +31,47 @@ const DOWNVOTE_MUTATION = gql`
   }
 `
 
-const Topic = withApollo(({topic}) => (
-  <div className="topic" key={topic.key}>
-    <div className="votes">
-      <span className="upvote">▲</span>
-      <span className="number">{topic.votes}</span>
-      <span className="downvote">▼</span>
+const Topic = withApollo(({ client, topic }) => {
+  return (
+    <div className="topic" key={topic.key}>
+      <div className="votes">
+        <span onClick={(e) => {
+          client.mutate({
+            mutation: UPVOTE_MUTATION,
+            variables: { id: topic.id },
+            optimisticResponse: {
+              upVote: {
+                __typename: "Topic",
+                id: topic.id,
+                content: topic.content,
+                votes: ++topic.votes
+              }
+            }
+          })
+        }}
+          className="upvote">▲</span>
+        <span className="number">{topic.votes}</span>
+        <span onClick={(e) => {
+          client.mutate({
+            mutation: DOWNVOTE_MUTATION,
+            variables: { id: topic.id },
+            optimisticResponse: {
+              downVote: {
+                __typename: "Topic",
+                id: topic.id,
+                content: topic.content,
+                votes: --topic.votes
+              }
+            }
+          })
+        }} className="downvote">▼</span>
+      </div>
+      <p>
+        {topic.content}
+      </p>
     </div>
-    <p>
-      {topic.content}
-    </p>
-  </div>
-))
+  )
+})
 
 class App extends Component {
   render() {
