@@ -35,7 +35,7 @@ export default (props) => {
     })
   }
 
-  // Mutation component is being used to create a topic
+  // The Mutation component - https://www.apollographql.com/docs/react/essentials/mutations#basic
   return (
     <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content }}>
       {(newTopic, { loading }) => (
