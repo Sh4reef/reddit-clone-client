@@ -55,7 +55,7 @@ const Topic = withApollo(({ client, topic }) => {
             }
           }).then(() => setLoading(false))
         }}
-          className="upvote">▲</span>
+          className="upvote" style={{ cursor: loading && "progress", color: loading && "silver" }}>▲</span>
         <span className="number">{topic.votes}</span>
         <span onClick={(e) => {
           setLoading(true)
@@ -76,7 +76,7 @@ const Topic = withApollo(({ client, topic }) => {
               proxy.writeQuery({ query: TOPICS_QUERY, data: { topics: sortedTopics } })
             }
           }).then(() => setLoading(false))
-        }} className="downvote">▼</span>
+        }} className="downvote" style={{ cursor: loading && "progress", color: loading && "silver" }}>▼</span>
       </div>
       <p className="content">
         {topic.content}
