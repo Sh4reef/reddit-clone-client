@@ -16,9 +16,9 @@ export default (props) => {
     proxy.writeQuery({ query: TOPICS_QUERY, data: { topics } })
   }
 
-  const handleSubmit = (newTopic) => async (e) => {
+  const handleSubmit = (newTopic) => (e) => {
     e.preventDefault()
-    await newTopic({
+    newTopic({
       optimisticResponse: {
         newTopic: {
           id: String(getRandomNum()),
@@ -28,10 +28,11 @@ export default (props) => {
         }
       },
       update: updateCache
+    }).then(() => {
+      setShow(!show)
+      setContent("")
+      window.scroll({ top: document.querySelector('body').getBoundingClientRect().bottom, behavior: "smooth" })
     })
-    setShow(!show)
-    setContent("")
-    window.scroll({ top: document.querySelector('body').getBoundingClientRect().bottom, behavior: "smooth" })
   }
 
   // Mutation component is being used to create a topic
