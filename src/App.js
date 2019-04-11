@@ -89,6 +89,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="header">
+          <div className="create">
+            Create new topic
+          </div>
+        </div>
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading...</div>
