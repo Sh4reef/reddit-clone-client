@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import './App.css';
 // apollo
 import gql from 'graphql-tag';
-import { Query, withApollo } from 'react-apollo';
+import { Query, Mutation, withApollo } from 'react-apollo';
 
 const TOPICS_QUERY = gql`
   query getTopics {
@@ -25,6 +25,14 @@ const UPVOTE_MUTATION = gql`
 const DOWNVOTE_MUTATION = gql`
   mutation DownVote($id: ID!) {
     downVote(id: $id) {
+      id content votes
+    }
+  }
+`
+
+const NEWTOPIC_MUTATION = gql`
+  mutation NewTopic($content: String!) {
+    newTopic(content: $content) {
       id content votes
     }
   }
@@ -90,34 +98,54 @@ const Header = (props) => {
   const [content, setContent] = useState("")
   const invalid = content.length === 0 || content.length > 255
   const exceeded = content.length > 255
+  const getRandomNum = () => Math.floor(Math.random() * Math.floor(987654321))
   return (
-    <header className="header">
-      <div onClick={() => {
-        setShow(!show)
-      }} className="create">
-        Create new topic
-      </div>
-      <div className={show ? "overlay show-overlay" : "overlay"}></div>
-      <div className={show ? "modal show-modal" : "modal"}>
-        <form onSubmit={(e) => {
-          e.preventDefault()
-          console.log(content.length)
-        }}>
-          <div className="label">
-            <label>create new topic</label>
-          </div>
-          <textarea onChange={(e) => setContent(e.target.value.trim())} placeholder="Content..." />
-          <div className="number-of-characters" style={{ color: exceeded ? "red" : "" }}>
-            {255 - content.length}/255 {exceeded && "Exceeded"}
-          </div>
-          <button type="submit" disabled={invalid} value={content} className="create-btn">Create</button>
-          <button onClick={(e) => {
-            e.preventDefault()
+    <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content }}>
+      {(newTopic) => (
+        <header className="header">
+          <div onClick={() => {
             setShow(!show)
-          }} className="cancel-btn">Cancel</button>
-        </form>
-      </div>
-    </header>
+          }} className="create">
+            Create new topic
+        </div>
+          <div className={show ? "overlay show-overlay" : "overlay"}></div>
+          <div className={show ? "modal show-modal" : "modal"}>
+            <form onSubmit={async (e) => {
+              e.preventDefault()
+              await newTopic({
+                optimisticResponse: {
+                  newTopic: {
+                    id: String(getRandomNum()),
+                    content,
+                    votes: 0,
+                    __typename: "Topic"
+                  }
+                },
+                update: (proxy, {data: newTopic}) => {
+                  const {topics} = proxy.readQuery({query: TOPICS_QUERY})
+                  topics.push(newTopic.newTopic)
+                  proxy.writeQuery({query: TOPICS_QUERY, data: {topics}})
+                }
+              })
+              setShow(!show)
+            }}>
+              <div className="label">
+                <label>create new topic</label>
+              </div>
+              <textarea onChange={(e) => setContent(e.target.value.trim())} placeholder="Content..." />
+              <div className="number-of-characters" style={{ color: exceeded ? "red" : "" }}>
+                {255 - content.length}/255 {exceeded && "Exceeded"}
+              </div>
+              <button type="submit" disabled={invalid} value={content} className="create-btn">Create</button>
+              <button onClick={(e) => {
+                e.preventDefault()
+                setShow(!show)
+              }} className="cancel-btn">Cancel</button>
+            </form>
+          </div>
+        </header>
+      )}
+    </Mutation>
   )
 }
 
