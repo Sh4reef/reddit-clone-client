@@ -104,11 +104,10 @@ const Header = (props) => {
     <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content }}>
       {(newTopic) => (
         <header className="header">
-          <div onClick={() => {
-            setShow(!show)
-          }} className="create">
+          <h5 className="header-title">Moovaz - Topics</h5>
+          <div onClick={() => { setShow(!show) }} className="create">
             Create new topic
-        </div>
+          </div>
           <div className={show ? "overlay show-overlay" : "overlay"}></div>
           <div className={show ? "modal show-modal" : "modal"}>
             <form onSubmit={async (e) => {
