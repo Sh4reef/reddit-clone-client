@@ -11,7 +11,28 @@
   overflow: auto;
 }
 
+.overlay {
+  z-index: 1000;
+  position: fixed;
+  display: none;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.8;
+  transition: ease-out 0.2s;
+  background-color: #fff;
+}
+
+.show-overlay {
+  display: block;
+  transition: ease-in 0.2s;
+}
+
 .modal {
+  z-index: 2000;
   -webkit-box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 5px 5px 50px 0px rgba(0, 0, 0, 0.5);
@@ -22,6 +43,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: ease-out 0.2s;
+}
+
+.show-modal {
+  opacity: 1;
+  transition: ease-in 0.2s;
 }
 
 .label {

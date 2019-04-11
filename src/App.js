@@ -86,12 +86,16 @@ const Topic = withApollo(({ client, topic }) => {
 })
 
 const Header = (props) => {
+  const [show, setShow] = useState(false)
   return (
     <header className="header">
-      <div className="create">
+      <div onClick={() => {
+        setShow(!show)
+      }} className="create">
         Create new topic
       </div>
-      <div className="modal">
+      <div className={show ? "overlay show-overlay" : "overlay"}></div>
+      <div className={show ? "modal show-modal" : "modal"}>
         <form>
           <div className="label">
             <label>create new topic</label>
