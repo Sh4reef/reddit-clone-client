@@ -89,6 +89,7 @@ const Header = (props) => {
   const [show, setShow] = useState(false)
   const [content, setContent] = useState("")
   const invalid = content.length === 0 || content.length > 255
+  const exceeded = content.length > 255
   return (
     <header className="header">
       <div onClick={() => {
@@ -106,7 +107,9 @@ const Header = (props) => {
             <label>create new topic</label>
           </div>
           <textarea onChange={(e) => setContent(e.target.value.trim())} placeholder="Content..." />
-          <div className="number-of-characters">{255 - content.length}/255</div>
+          <div className="number-of-characters" style={{ color: exceeded ? "red" : "" }}>
+            {255 - content.length}/255 {exceeded && "Exceeded"}
+          </div>
           <button type="submit" disabled={invalid} value={content} className="create-btn">Create</button>
           <button onClick={(e) => {
             e.preventDefault()
