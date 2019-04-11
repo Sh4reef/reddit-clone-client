@@ -85,24 +85,30 @@ const Topic = withApollo(({ client, topic }) => {
   )
 })
 
+const Header = (props) => {
+  return (
+    <header className="header">
+      <div className="create">
+        Create new topic
+      </div>
+      <div className="modal">
+        <form>
+          <div className="label">
+            <label>create new topic</label>
+          </div>
+          <textarea placeholder="Content..." />
+          <button type="submit" className="create-btn">Create</button>
+        </form>
+      </div>
+    </header>
+  )
+}
+
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="header">
-          <div className="create">
-            Create new topic
-          </div>
-          <div className="modal">
-            <form>
-              <div className="label">
-                <label>create new topic</label>
-              </div>
-              <textarea placeholder="Content..."/>
-              <button type="submit" className="create-btn">Create</button>
-            </form>
-          </div>
-        </header>
+        <Header />
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <div>Loading...</div>
