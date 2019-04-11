@@ -7,8 +7,8 @@ export default (props) => {
   const [show, setShow] = useState(false)
   const [loading, setLoading] = useState(false)
   const [content, setContent] = useState("")
-  const invalid = content.length === 0 || content.length > 255
   const exceeded = content.length > 255
+  const invalid = content.length === 0 || exceeded
   const getRandomNum = () => Math.floor(Math.random() * Math.floor(987654321))
   return (
     <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content }}>
