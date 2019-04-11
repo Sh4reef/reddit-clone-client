@@ -85,6 +85,11 @@
   height: 100px;
 }
 
+.number-of-characters {
+  margin-top: 10px;
+  float: left;
+}
+
 .create-btn,
 .cancel-btn {  
   padding: 10px 20px;

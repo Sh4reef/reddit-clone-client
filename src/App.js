@@ -87,6 +87,8 @@ const Topic = withApollo(({ client, topic }) => {
 
 const Header = (props) => {
   const [show, setShow] = useState(false)
+  const [content, setContent] = useState("")
+  const invalid = content.length === 0 || content.length > 255
   return (
     <header className="header">
       <div onClick={() => {
@@ -96,12 +98,16 @@ const Header = (props) => {
       </div>
       <div className={show ? "overlay show-overlay" : "overlay"}></div>
       <div className={show ? "modal show-modal" : "modal"}>
-        <form>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+          console.log(content.length)
+        }}>
           <div className="label">
             <label>create new topic</label>
           </div>
-          <textarea placeholder="Content..." />
-          <button type="submit" className="create-btn">Create</button>
+          <textarea onChange={(e) => setContent(e.target.value.trim())} placeholder="Content..." />
+          <div className="number-of-characters">{255 - content.length}/255</div>
+          <button type="submit" disabled={invalid} value={content} className="create-btn">Create</button>
           <button onClick={(e) => {
             e.preventDefault()
             setShow(!show)
