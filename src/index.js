@@ -7,6 +7,8 @@ import * as serviceWorker from './serviceWorker';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
+// This is the apollo client instance and it's being passed to
+// the ApolloProvider to share it with whole app
 const client = new ApolloClient({
   uri: "http://localhost:4000/"
 })

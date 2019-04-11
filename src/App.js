@@ -12,6 +12,11 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+        {/*
+          Query component is being used to fetch list of topics
+          using TOPICS_QUERY from the server and the result will
+          be an array of topics objects 
+        */}
         <Query query={TOPICS_QUERY}>
           {({ loading, error, data }) => {
             if (loading) return <div className="loading">Loading...</div>
