@@ -37,7 +37,7 @@ export default (props) => {
 
   // The Mutation component - https://www.apollographql.com/docs/react/essentials/mutations#basic
   return (
-    <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content }}>
+    <Mutation mutation={NEWTOPIC_MUTATION} variables={{ content: content.trim() }}>
       {(newTopic, { loading }) => (
         <header className="header">
           <h5 className="header-title">Moovaz - Topics</h5>
@@ -51,7 +51,7 @@ export default (props) => {
                 <label>create new topic</label>
               </div>
               <textarea
-                onChange={(e) => setContent(e.target.value.trim())}
+                onChange={(e) => setContent(e.target.value)}
                 value={content}
                 placeholder="Content..." />
               <div className="number-of-characters" style={{ color: exceeded ? "red" : "" }}>
