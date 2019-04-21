@@ -11,7 +11,7 @@ import { ApolloProvider } from 'react-apollo';
 // the ApolloProvider to share it with whole app
 // Get started - https://www.apollographql.com/docs/react/essentials/get-started
 const client = new ApolloClient({
-  uri: "https://moovaz-reddit-lfgfmdkzrk.now.sh/"
+  uri: "https://mrserver.now.sh/"
 })
 
 // React-Apollo includes a component for providing a client instance to a React component tree,
