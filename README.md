@@ -10,7 +10,7 @@ topic or upvote and downvote existing topics.
 
 ## Live
 Expect a delay when opening the link because it's free tier<br/>
-[https://moovaz-reddit-client-noulcwrhlq.now.sh](https://moovaz-reddit-client-noulcwrhlq.now.sh)
+[https://mrclient.now.sh](https://mrclient.now.sh)
 
 ## Launch the app locally
 - Prerequisite
